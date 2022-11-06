@@ -1,5 +1,6 @@
 # Welcome to Remix!
 
+- [Wrap up database queries](https://remix.run/docs/en/v1/tutorials/jokes#wrap-up-database-queries)
 - [Remix Docs](https://remix.run/docs)
 
 ## Development
