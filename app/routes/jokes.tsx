@@ -10,7 +10,9 @@ export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: stylesUrl }];
 };
 
-type LoaderData = { jokeListItems: Array<Joke> };
+type LoaderData = {
+  jokeListItems: Array<Joke>;
+};
 
 export const loader: LoaderFunction = async () => {
   const data: LoaderData = {
