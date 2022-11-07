@@ -1,21 +1,18 @@
-import type { Joke } from "@prisma/client";
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "@remix-run/react";
+import type { Joke } from "@prisma/client";
 
 import { db } from "~/utils/db.server";
 
-type LoaderData = {
-  joke: Joke;
-};
+type LoaderData = { joke: Joke };
 
 export const loader: LoaderFunction = async ({ params }) => {
-  const data: LoaderData = {
-    joke: await db.joke.findUniqueOrThrow({
-      where: { id: params.jokeId },
-    }),
-  };
+  const joke = await db.joke.findUnique({
+    where: { id: params.jokeId },
+  });
+  if (!joke) throw new Error("Joke not found");
+  const data: LoaderData = { joke };
   return json(data);
 };
 
@@ -26,9 +23,7 @@ export default function JokeRoute() {
     <div>
       <p>Here's your hilarious joke:</p>
       <p>{data.joke.content}</p>
-      <p>
-        <Link to={data.joke.id}>{data.joke.name} Permalink</Link>
-      </p>
+      <Link to=".">{data.joke.name} Permalink</Link>
     </div>
   );
 }
