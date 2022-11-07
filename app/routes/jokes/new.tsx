@@ -10,7 +10,7 @@ export const action: ActionFunction = async ({ request }) => {
   // we do this type check to be extra sure and to make TypeScript happy
   // we'll explore validation next!
   if (typeof name !== "string" || typeof content !== "string") {
-    throw new Error("Form not submitted correctly.");
+    throw new Error(`Form not submitted correctly.`);
   }
 
   const fields = { name, content };
